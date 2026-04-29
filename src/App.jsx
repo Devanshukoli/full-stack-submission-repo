@@ -6,6 +6,20 @@ const Header = (props) => {
   )
 }
 
+const Content = (props) => {
+  // console.log('content props....', props.part)
+  const propsList = props.part.map((part, index) =>
+    <p key={index}>{part.name}-{part.exercises}</p>
+  )
+  // console.log('propslilst....', propsList)
+
+  return (
+    <>
+      {propsList}
+    </>
+  )
+}
+
 const App = () => {
   const course = 'Half Stack application development'
 
@@ -28,6 +42,7 @@ const App = () => {
   return (
     <div>
       <Header course={course} />
+      <Content part={part} />
     </div>
   )
 }
