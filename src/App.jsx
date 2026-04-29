@@ -21,17 +21,12 @@ const Content = (props) => {
 }
 
 const Total = (props) => {
-  // console.log('total comp. props...', props)
 
-  const sum = props.parts.map((part, index) =>
-    <p key={index}>{part.exercises}</p>
-  )
-  // console.log('sum', sum[0].props.children)
-  const sum2 = sum[0].props.children + sum[1].props.children + sum[2].props.children
+  const sum = props.parts.reduce((sum, part) => sum + part.exercises, 0)
 
   return (
     <>
-      {sum2}
+      <p>Total exercises : { sum}</p>
     </>
   )
 }
