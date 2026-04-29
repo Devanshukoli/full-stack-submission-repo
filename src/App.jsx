@@ -20,6 +20,22 @@ const Content = (props) => {
   )
 }
 
+const Total = (props) => {
+  // console.log('total comp. props...', props)
+
+  const sum = props.parts.map((part, index) =>
+    <p key={index}>{part.exercises}</p>
+  )
+  // console.log('sum', sum[0].props.children)
+  const sum2 = sum[0].props.children + sum[1].props.children + sum[2].props.children
+
+  return (
+    <>
+      {sum2}
+    </>
+  )
+}
+
 const App = () => {
   const course = 'Half Stack application development'
 
@@ -43,6 +59,7 @@ const App = () => {
     <div>
       <Header course={course} />
       <Content part={part} />
+      <Total parts={part} />
     </div>
   )
 }
