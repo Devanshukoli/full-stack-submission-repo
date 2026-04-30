@@ -9,7 +9,9 @@ const root = ReactDOM.createRoot(document.getElementById('root'))
 const refresh = () => {
   root.render(<App counter={counter} />)
 }
-setInterval(() => {
+const intervalId = setInterval(() => {
   refresh()
   counter += 1
 }, 1000)
+
+clearInterval(intervalId)
