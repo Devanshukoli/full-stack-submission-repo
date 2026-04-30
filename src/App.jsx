@@ -1,60 +1,29 @@
-const Header = (props) => {
-  return (
-    <>
-      <h1>{props.course}</h1>
-    </>
-  )
-}
+const Hello = (props) => {
 
-const Content = (props) => {
-  // console.log('content props....', props.part)
-  const propsList = props.part.map((part, index) =>
-    <p key={index}>{part.name}-{part.exercises}</p>
-  )
-  // console.log('propslilst....', propsList)
+  const bornYear = () => {
+    const yearNow = new Date().getFullYear();
+    return yearNow - props.age
+  }
 
   return (
     <>
-      {propsList}
-    </>
-  )
-}
-
-const Total = (props) => {
-
-  const sum = props.parts.reduce((sum, part) => sum + part.exercises, 0)
-
-  return (
-    <>
-      <p>Total exercises : {sum}</p>
+      <p>
+        Hello {props.name}, you are {props.age} years old
+      </p>
+      <p>So, you were probably born into the {bornYear()}</p>
     </>
   )
 }
 
 const App = () => {
-  const course = {
-    name: 'Half Stack application development',
-    part: [
-      {
-        name: 'Fundamentals of React',
-        exercises: 10
-      },
-      {
-        name: 'Using props to pass data',
-        exercises: 7
-      },
-      {
-        name: 'State of a component',
-        exercises: 14
-      }
-    ]
-  }
+  const name = 'Peter'
+  const age = 10
 
   return (
     <div>
-      <Header course={course.name} />
-      <Content part={course.part} />
-      <Total parts={course.part} />
+      <h1>Greetings</h1>
+      <Hello name="Maya" age={26 + 10} />
+      <Hello name={name} age={age} />
     </div>
   )
 }
