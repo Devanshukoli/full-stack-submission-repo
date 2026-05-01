@@ -13,6 +13,9 @@ const App = () => {
 
       {/* adding the reset button */}
       <button onClick={() => setCounter(0)}>Reset</button>
+
+      {/** adding decrement counter */}
+      <button onClick={() => setCounter(counter - 1)}>Minus</button>
     </>
   )
 }
