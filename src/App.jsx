@@ -3,19 +3,31 @@ import { useState } from "react";
 const App = () => {
   const [counter, setCounter] = useState(0);
 
+  const increaseCount = () => {
+    return setCounter(counter + 1)
+  }
+
+  const resetCount = () => {
+    return setCounter(0)
+  }
+
+  const decrementCount = () => {
+    return setCounter(counter - 1)
+  }
+
   return (
     <>
       <div>
         {counter}
       </div>
       {/* setting the counter inside onclick */}
-      <button onClick={() => { setCounter(counter + 1); console.log('increment') }}>Plus</button>
+      <button onClick={increaseCount}>Plus</button>
 
       {/* adding the reset button */}
-      <button onClick={() => { setCounter(0); console.log('reset') }}>Reset</button>
+      <button onClick={resetCount}>Reset</button>
 
       {/** adding decrement counter */}
-      <button onClick={() => { setCounter(counter - 1);  console.log('decrement')}}>Minus</button>
+      <button onClick={decrementCount}>Minus</button>
     </>
   )
 }
