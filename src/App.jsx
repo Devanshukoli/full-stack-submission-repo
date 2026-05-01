@@ -8,7 +8,11 @@ const App = () => {
       <div>
         {counter}
       </div>
+      {/* setting the counter inside onclick */}
       <button onClick={() => setCounter(counter + 1)}>Plus</button>
+
+      {/* adding the reset button */}
+      <button onClick={() => setCounter(0)}>Reset</button>
     </>
   )
 }
