@@ -22,10 +22,10 @@ const App = () => {
   return (
     <div>
       {clicks.left}
-      <button onClick={() => handleLeftClick()}>
+      <button onClick={handleLeftClick}>
         left
       </button>
-      <button onClick={() => handleRightClick()}>
+      <button onClick={handleRightClick}>
         right
       </button>
       {clicks.right}
