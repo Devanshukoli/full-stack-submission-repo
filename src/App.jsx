@@ -1,47 +1,20 @@
 import { useState } from "react";
 
-const Display = ({ counter }) => {
-  return (
-    <>
-      {counter}
-    </>
-  )
-}
-
-const Button = ({ onClick, text }) => {
-  return (
-    <>
-      <button onClick={onClick}>{text}</button>
-    </>
-  )
-}
-
 const App = () => {
-  const [counter, setCounter] = useState(0);
-  console.log('rendering with counter value: ', counter)
-
-  const increaseCount = () => {
-    console.log('increasing, value before:', counter)
-    return setCounter(counter + 1)
-  }
-
-  const resetCount = () => {
-    console.log('reseting to zero, value before:', counter)
-    return setCounter(0)
-  }
-
-  const decrementCount = () => {
-    console.log('decreasing, value before:', counter)
-    return setCounter(counter - 1)
-  }
+  const [left, setLeft] = useState(0)
+  const [right, setRight] = useState(0)
 
   return (
-    <>
-      <Display counter={counter} />
-      <Button onClick={increaseCount} text='Plus' />
-      <Button onClick={resetCount} text='Reset' />
-      <Button onClick={decrementCount} text='Minus' />
-    </>
+    <div>
+      {left}
+      <button onClick={() => setLeft(left + 1)}>
+        left
+      </button>
+      <button onClick={() => setRight(right + 1)}>
+        right
+      </button>
+      {right}
+    </div>
   )
 }
 
