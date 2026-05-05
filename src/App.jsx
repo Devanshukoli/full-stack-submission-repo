@@ -1,26 +1,27 @@
 import { useState } from "react";
 
 const App = () => {
-  const [clicks, setClicks] = useState({ left: 0, right: 0 });
+  const [firstName, setFirstName] = useState('')
+  const [lastName, setLastName] = useState('')
+  const [fullName, setFullName] = useState('')
 
-  const handleLeftClick = () => {
-    setClicks({ ...clicks, left: clicks.left + 1 })
+  const handleFirstNameChange = (e) => {
+    setFirstName(e.target.value)
+    setFullName(e.target.value + ' ' + lastName)
   }
 
-  const handleRightClick = () => {
-    setClicks({ ...clicks, right: clicks.right + 1 })
+  const handleLastNameChange = (e) => {
+    setLastName(e.target.value)
+    setFullName(firstName + ' ' + e.target.value)
   }
 
   return (
     <div>
-      {clicks.left}
-      <button onClick={handleLeftClick}>
-        left
-      </button>
-      <button onClick={handleRightClick}>
-        right
-      </button>
-      {clicks.right}
+      <h1>Welcome to store!</h1>
+      <input value={firstName} onChange={handleFirstNameChange}></input>
+      <input value={lastName} onChange={handleLastNameChange}></input>
+
+      <p>So, You're fullname is <b>{ fullName}</b></p>
     </div>
   )
 }
