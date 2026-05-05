@@ -8,10 +8,11 @@ const initialValues = [
 
 const App = () => {
   const [items, setItems] = useState(initialValues);
-  const [selectedItem, setSelectedItems] = useState([])
+  const [selectedId, setSelectedId] = useState(0)
 
-
-  const handleSetItemChange = (id, e) => {
+  const selectedItem = items.find(item => item.id === selectedId)
+  
+  const handleItemChange = (id, e) => {
     setItems(items.map((item) => {
       if (item.id === id) {
         return { ...item, title: e.target.value }
@@ -27,9 +28,9 @@ const App = () => {
       <ul>
         {items.map((i) => (
           <li key={i.id}>
-            <input value={i.title} onChange={(e) => handleSetItemChange(i.id, e)}></input>
+            <input value={i.title} onChange={(e) => handleItemChange(i.id, e)}></input>
             {' '}
-            <button onClick={() => setSelectedItems(i)}>choose</button>
+            <button onClick={() => setSelectedId(i.id)}>choose</button>
           </li>
         ))}
       </ul>
