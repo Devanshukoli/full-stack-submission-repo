@@ -7,7 +7,7 @@ function PlaceTree({ id, parentId, placesById, onComplete }) {
   return (
     <li>
       {place.title}
-      <button onClick={() => { onComplete(parentId, id) }}>Complete</button>
+      <input type='checkbox' onClick={() => { onComplete(parentId, id) }} />
       {childIds.length > 0 && (
         <ol>
           {childIds.map(childId => (
@@ -30,7 +30,7 @@ export default function TravelPlan() {
 
   function handleComplete(parentId, childId) {
     const parent = plan[parentId]
-    console.log('parent inside handlecompllete function...', parent)
+    const isVisited = [] // add place that is marked as visited : true
 
     const nextParent = {
       ...parent,
