@@ -1,4 +1,4 @@
-xport const initialTravelPlan = {
+export const initialTravelPlan = {
   0: {
     id: 0,
     title: '(Root)',
