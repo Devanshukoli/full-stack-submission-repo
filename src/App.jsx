@@ -1,13 +1,22 @@
 import { useState } from 'react';
 import { initialTravelPlan } from './data/places.js';
 
-function PlaceTree({ id, parentId, placesById, onComplete }) {
+function PlaceTree({ id, placesById, onComplete }) {
   const place = placesById[id]
+  console.log('place...', place)
   const childIds = place.childIds;
+  console.log('childIds...', childIds)
   return (
     <li>
-      {place.title}
-      <input type='checkbox' onClick={() => { onComplete(parentId, id) }} />
+      <span
+        style={{
+          textDecoration: place.visited ? 'line-through' : 'none',
+          color: place.visited ? 'gray' : 'black'
+        }}
+      >
+        {place.title}
+      </span>
+      <input type='checkbox' checked={place.visited || false} onChange={() => { onComplete(id) }} />
       {childIds.length > 0 && (
         <ol>
           {childIds.map(childId => (
@@ -28,18 +37,17 @@ function PlaceTree({ id, parentId, placesById, onComplete }) {
 export default function TravelPlan() {
   const [plan, setPlan] = useState(initialTravelPlan);
 
-  function handleComplete(parentId, childId) {
-    const parent = plan[parentId]
-    const isVisited = [] // add place that is marked as visited : true
+  function handleComplete(id) {
+    const place = plan[id]
 
-    const nextParent = {
-      ...parent,
-      childIds: parent.childIds.filter(id => id !== childId)
+    const updatedPlace = {
+      ...place,
+      visited: !place.visited
     }
 
     setPlan({
       ...plan,
-      [parentId]: nextParent
+      [id]: updatedPlace
     })
   }
 
@@ -50,7 +58,7 @@ export default function TravelPlan() {
       <h2>Places to visit</h2>
       <ol>
         {planetIds.map(id => (
-          <PlaceTree key={id} id={id} parentId={0} placesById={plan} onComplete={handleComplete} />
+          <PlaceTree key={id} id={id} placesById={plan} onComplete={handleComplete} />
         ))}
       </ol>
     </>

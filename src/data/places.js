@@ -107,7 +107,8 @@ export const initialTravelPlan = {
   21: {
     id: 21,
     title: 'India',
-    childIds: []
+    childIds: [],
+    visited: false,
   },
   22: {
     id: 22,
