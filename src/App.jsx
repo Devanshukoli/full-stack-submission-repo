@@ -1,42 +1,34 @@
-import { useState } from "react";
+import { useState } from 'react';
+import { initialTravelPlan } from './data/places.js';
 
-const initialValues = [
-  { title: 'Pretzels', id: 0 },
-  { title: 'Crispy Seaweed', id: 1 },
-  { title: 'Granola', id: 2 },
-]
-
-const App = () => {
-  const [items, setItems] = useState(initialValues);
-  const [selectedId, setSelectedId] = useState(0)
-
-  const selectedItem = items.find(item => item.id === selectedId)
-  
-  const handleItemChange = (id, e) => {
-    setItems(items.map((item) => {
-      if (item.id === id) {
-        return { ...item, title: e.target.value }
-      } else {
-        return item
-      }
-    }))
-  }
-
+function PlaceTree({ place }) {
+  const childPlaces = place.childPlaces;
+  console.log(childPlaces)
   return (
-    <div>
-      <h1>What's in your travel pack?</h1>
-      <ul>
-        {items.map((i) => (
-          <li key={i.id}>
-            <input value={i.title} onChange={(e) => handleItemChange(i.id, e)}></input>
-            {' '}
-            <button onClick={() => setSelectedId(i.id)}>choose</button>
-          </li>
-        ))}
-      </ul>
-      <p>In my backpack I have : {selectedItem.title}</p>
-    </div>
-  )
+    <li>
+      {place.title}
+      {childPlaces.length > 0 && (
+        <ol>
+          {childPlaces.map(place => (
+            <PlaceTree key={place.id} place={place} />
+          ))}
+        </ol>
+      )}
+    </li>
+  );
 }
 
-export default App;
+export default function TravelPlan() {
+  const [plan, setPlan] = useState(initialTravelPlan);
+  const planets = plan.childPlaces;
+  return (
+    <>
+      <h2>Places to visit</h2>
+      <ol>
+        {planets.map(place => (
+          <PlaceTree key={place.id} place={place} />
+        ))}
+      </ol>
+    </>
+  );
+}
