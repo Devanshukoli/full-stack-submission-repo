@@ -1,91 +1,33 @@
-import { useState } from 'react';
-import { initialTravelPlan } from './data/places.js';
+import { useState } from 'react'
 
-function PlaceTree({ id, placesById, onComplete }) {
-  const place = placesById[id]
-  // console.log('place...', place)
-  const childIds = place.childIds;
-  // console.log('childIds...', childIds)
-  return (
-    <li>
-      <span
-        style={{
-          textDecoration: place.visited ? 'line-through' : 'none',
-          color: place.visited ? 'gray' : 'black'
-        }}
-      >
-        {place.title}
-      </span>
-      <input type='checkbox' checked={place.visited || false} onChange={() => { onComplete(id) }} />
-      {childIds.length > 0 && (
-        <ol>
-          {childIds.map(childId => (
-            <PlaceTree
-              key={childId}
-              id={childId}
-              parentId={id}
-              placesById={placesById}
-              onComplete={onComplete}
-            />
-          ))}
-        </ol>
-      )}
-    </li>
-  );
-}
+export default function App() {
+  const [left, setLeft] = useState(0)
+  const [right, setRight] = useState(0)
+  const [allClicks, setAll] = useState([])
+  const [total, setTotal] = useState(0)
 
-export default function TravelPlan() {
-  const [plan, setPlan] = useState(initialTravelPlan);
-
-  function handleComplete(id) {
-    const place = plan[id]
-
-    const updatedPlan = updatePlaceAndChildren(
-      plan,
-      id,
-      !place.visited
-    )
-
-    setPlan(updatedPlan)
+  const handleLeftClick = () => {
+    setAll(allClicks.concat('L'))
+    setLeft(left + 1)
+    setTotal(total + 1)
   }
 
-  function updatePlaceAndChildren(plan, id, visited) {
-    const place = plan[id]
 
-    // clone current place with updated visited state
-    const updatedPlace = {
-      ...place,
-      visited
-    }
-
-    // start building updated plan
-    let updatedPlan = {
-      ...plan,
-      [id]: updatedPlace
-    }
-
-    // recursively update children
-    place.childIds.forEach(childId => {
-      updatedPlan = updatePlaceAndChildren(
-        updatedPlan,
-        childId,
-        visited
-      )
-    })
-
-    return updatedPlan
+  const handleRightClick = () => {
+    setAll(allClicks.concat('R'))
+    setRight(right + 1)
+    setTotal(total + 1)
   }
 
-  const root = plan[0];
-  const planetIds = root.childIds;
   return (
-    <>
-      <h2>Places to visit</h2>
-      <ol>
-        {planetIds.map(id => (
-          <PlaceTree key={id} id={id} placesById={plan} onComplete={handleComplete} />
-        ))}
-      </ol>
-    </>
-  );
+    <div>
+      {left}
+      <button onClick={handleLeftClick}>left</button>
+      <button onClick={handleRightClick}>right</button>
+      {right}
+
+      <p>{allClicks.join(' ')}</p>
+      <p> Total : {total}</p>
+    </div>
+  )
 }
