@@ -3,9 +3,9 @@ import { initialTravelPlan } from './data/places.js';
 
 function PlaceTree({ id, placesById, onComplete }) {
   const place = placesById[id]
-  console.log('place...', place)
+  // console.log('place...', place)
   const childIds = place.childIds;
-  console.log('childIds...', childIds)
+  // console.log('childIds...', childIds)
   return (
     <li>
       <span
@@ -40,15 +40,40 @@ export default function TravelPlan() {
   function handleComplete(id) {
     const place = plan[id]
 
+    const updatedPlan = updatePlaceAndChildren(
+      plan,
+      id,
+      !place.visited
+    )
+
+    setPlan(updatedPlan)
+  }
+
+  function updatePlaceAndChildren(plan, id, visited) {
+    const place = plan[id]
+
+    // clone current place with updated visited state
     const updatedPlace = {
       ...place,
-      visited: !place.visited
+      visited
     }
 
-    setPlan({
+    // start building updated plan
+    let updatedPlan = {
       ...plan,
       [id]: updatedPlace
+    }
+
+    // recursively update children
+    place.childIds.forEach(childId => {
+      updatedPlan = updatePlaceAndChildren(
+        updatedPlan,
+        childId,
+        visited
+      )
     })
+
+    return updatedPlan
   }
 
   const root = plan[0];
