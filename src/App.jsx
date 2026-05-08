@@ -7,18 +7,16 @@ const Button = (props) => (
   </button>
 )
 
-const App = () => {
+const Display = props => <div>{props.value}</div>
+
+export default function App () {
   const [value, setValue] = useState(10)
 
   const setToValue = newValue => {
     console.log('value now', newValue)
     setValue(newValue)
   }
-
-  // Do not define components inside another component
-
-  const Display = props => <div>{props.value}</div>
-
+  
   return (
     <div>
 
