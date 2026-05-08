@@ -1,29 +1,39 @@
 import { useState } from 'react'
 
-// This is the right place to define a component
-const Button = (props) => (
-  <button onClick={props.onClick}>
-    {props.text}
-  </button>
-)
+const App = () => {
+  // save clicks of each button to its own state
+  const [good, setGood] = useState(0)
+  const [neutral, setNeutral] = useState(0)
+  const [bad, setBad] = useState(0)
 
-const Display = props => <div>{props.value}</div>
 
-export default function App () {
-  const [value, setValue] = useState(10)
-
-  const setToValue = newValue => {
-    console.log('value now', newValue)
-    setValue(newValue)
+  const handleGood = () => {
+    setGood(good + 1)
   }
-  
+
+  const handleNeutral = () => {
+    setNeutral(neutral + 1)
+  }
+
+  const handleBad = () => {
+    setBad(bad + 1)
+  }
+
   return (
     <div>
+      <h1>Give Feedback</h1>
+      <button onClick={() => handleGood()}>Good</button>
+      <button onClick={() => handleNeutral()}>neutral</button>
+      <button onClick={() => handleBad()}>bad</button>
 
-      <Display value={value} />
-      <Button onClick={() => setToValue(1000)} text="thousand" />
-      <Button onClick={() => setToValue(0)} text="reset" />
-      <Button onClick={() => setToValue(value + 1)} text="increment" />
+      <h2>Stats</h2>
+      <span>Good : {good}</span>
+      <br></br>
+      <span>neutral : {neutral}</span>
+      <br></br>
+      <span>bad : {bad}</span>
     </div>
   )
 }
+
+export default App
