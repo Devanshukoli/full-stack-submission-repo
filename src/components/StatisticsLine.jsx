@@ -1,7 +1,0 @@
-export default function StatisticsLine({onClick, text}) {
-  return (
-    <>
-      <button onClick={onClick}>{text}</button>
-    </>
-  )
-}
