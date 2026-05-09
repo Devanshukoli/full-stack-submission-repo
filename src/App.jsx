@@ -1,31 +1,7 @@
 import { useState } from 'react'
-
-const Statistics = ({ good, neutral, bad, total, avg, postiviePercentage }) => {
-  return (
-    <>
-      <h2>Stats</h2>
-      <span>Good : {good}</span>
-      <br></br>
-      <span>neutral : {neutral}</span>
-      <br></br>
-      <span>bad : {bad}</span>
-      <br></br>
-      <span>All counts: {total}</span>
-      <br></br>
-      <span>Average : {avg}</span>
-      <br></br>
-      <span>Postive count percentage: {postiviePercentage}</span>
-    </>
-  )
-}
-
-const NoFeedBack = () => {
-  return (
-    <>
-      <h3>No Feedback Given</h3>
-    </>
-  )
-}
+import  Statistics  from './components/Statistics'
+import NoFeedBack from './components/NoFeedback'
+import StatisticsLine from './components/StatisticsLine'
 
 const App = () => {
   // save clicks of each button to its own state
@@ -53,9 +29,9 @@ const App = () => {
   return (
     <div>
       <h1>Give Feedback</h1>
-      <button onClick={() => handleGood()}>Good</button>
-      <button onClick={() => handleNeutral()}>neutral</button>
-      <button onClick={() => handleBad()}>bad</button>
+      <StatisticsLine text={"Good"} onClick={() => handleGood()} />
+      <StatisticsLine text={"Neutral"} onClick={() => handleNeutral()} />
+      <StatisticsLine text={"Bad"} onClick={() => handleBad()} />
 
       {(good || neutral || bad) === 0 ? <NoFeedBack /> : <Statistics
         good={good}
