@@ -23,7 +23,6 @@ const App = () => {
       return setSelected(num)
     })
   }
-
   
   function handleVotes() {
     let copy = [...votes]
@@ -33,14 +32,24 @@ const App = () => {
     setVotes(copy)
   }
 
+  
+  const mostVotedAnecodte = Math.max(...votes)
+  const maxAnecdote = anecdotes[votes.indexOf(mostVotedAnecodte)]
+
+
+
   return (
     <div>
-      {anecdotes[selected]}
-      <br></br>
-      <span>has {votes[selected]} votes</span>
+      <h1>Ancedote of the day : </h1>
+      <p>{anecdotes[selected]}</p>
+      <p>has {votes[selected]} votes</p>
       <br></br>
       <button onClick={() => handleVotes()}>Votes</button>
       <button onClick={() => handleAnecdotes()}>Next anecdotes</button>
+      
+      <h2>Ancedotes with most vote</h2>
+      <p>{maxAnecdote}</p>
+      <p>has { mostVotedAnecodte} votes</p>
     </div>
   )
 }
