@@ -1,18 +1,37 @@
-export default function Statistics ({ good, neutral, bad, total, avg, postiviePercentage }) {
+export default function Statistics({ good, neutral, bad, total, avg, postiviePercentage }) {
   return (
     <>
       <h2>Stats</h2>
-      <span>Good : {good}</span>
-      <br></br>
-      <span>neutral : {neutral}</span>
-      <br></br>
-      <span>bad : {bad}</span>
-      <br></br>
-      <span>All counts: {total}</span>
-      <br></br>
-      <span>Average : {avg}</span>
-      <br></br>
-      <span>Postive count percentage: {postiviePercentage}</span>
+
+      <table>
+        <tbody>
+
+          <tr>
+            <td>Good : </td>
+            <td>{good}</td>
+          </tr>
+          <tr>
+            <td>Neutral : </td>
+            <td>{neutral}</td>
+          </tr>
+          <tr>
+            <td>Bad : </td>
+            <td>{bad}</td>
+          </tr>
+          <tr>
+            <td>Total : </td>
+            <td>{total}</td>
+          </tr>
+          <tr>
+            <td>avg : </td>
+            <td>{avg}</td>
+          </tr>
+          <tr>
+            <td>Postivie Percentage : </td>
+            <td>{postiviePercentage}</td>
+          </tr>
+        </tbody>
+      </table>
     </>
   )
 }
