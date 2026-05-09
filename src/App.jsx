@@ -40,8 +40,8 @@ const App = () => {
 
   const total = good + neutral + bad;
   const avg = (total) / 3;
-  const postiviePercentage = (good / total) * 100;
-
+  const postiviePercentage = ((good / total) * 100) > 0 ? (good / total) * 100 : 0;
+  
 
   return (
     <div>
