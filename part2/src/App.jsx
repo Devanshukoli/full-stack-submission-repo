@@ -30,7 +30,7 @@ const App = () => {
 
   return (
     <>
-      <Course key={course.id} course={course} />
+      <Course course={course} />
     </>
   )
 }
