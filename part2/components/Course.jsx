@@ -1,5 +1,6 @@
 const Course = ({ course }) => {
-  console.log(course.parts)
+  const nums = course.parts.map((x) => x.exercises)
+  const sum = nums.reduce((a, b) => a + b, 0)
   return (
     <>
       <h1>{course.name}</h1>
@@ -10,6 +11,7 @@ const Course = ({ course }) => {
           <br></br>
         </>
       ))}</p>
+      <p>Total: {sum}</p>
     </>
   )
 }
