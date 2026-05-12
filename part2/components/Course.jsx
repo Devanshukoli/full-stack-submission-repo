@@ -1,19 +1,32 @@
 import { Fragment } from "react"
 
 const Course = ({ course }) => {
-  const nums = course.parts.map((x) => x.exercises)
-  const sum = nums.reduce((a, b) => a + b, 0)
+
   return (
     <>
-      <h1>{course.name}</h1>
-      <p>{course.parts.map((part) => (
-        <Fragment key={part.id}>
-          <span>{part.name} {part.exercises
-          }</span>
-          <br></br>
-        </Fragment>
-      ))}</p>
-      <p>Total: {sum}</p>
+      {course.map((singleCourse) => {
+
+        const total = singleCourse.parts.reduce(
+          (sum, part) => sum + part.exercises,
+          0
+        )
+
+        return (
+          <Fragment key={singleCourse.id}>
+
+            <h1>{singleCourse.name}</h1>
+
+            {singleCourse.parts.map((part) => (
+              <div key={part.id}>
+                {part.name} {part.exercises}
+              </div>
+            ))}
+
+            <p>Total exercises: {total}</p>
+
+          </Fragment>
+        )
+      })}
     </>
   )
 }
