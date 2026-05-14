@@ -1,4 +1,7 @@
 import { useState } from 'react'
+import Filter from '../components/Filter'
+import Performanceform from '../components/Personform'
+import Persons from '../components/Person'
 
 const App = () => {
   const [persons, setPersons] = useState([
@@ -52,43 +55,24 @@ const App = () => {
 
   }
 
-  const filteredPerson = persons.filter((person) => (
-    person.name.toLowerCase().includes(searchTerm.toLowerCase())
-  ))
+
 
   return (
     <div>
       <h2>Phonebook</h2>
 
+      <Filter handleSearch={handleSearch} searchTerm={searchTerm} persons={persons} />
 
-      <div>
-        filter shown with : <input onChange={handleSearch} value={searchTerm} placeholder='ex: Arto Hellas'></input>
-        {filteredPerson.map((x) => (
-          <p>{ x.name}</p>
-        ))}
-      </div>
+      <Performanceform
+        addNumber={addNumber}
+        handleNameChange={handleNameChange}
+        newName={newName}
+        handlePhoneNumberChange={handlePhoneNumberChange}
+        newNumber={newNumber}
+      />
 
+      <Persons persons={persons} />
 
-      <form onSubmit={addNumber}>
-
-        <br></br>
-
-        <h2>Add New</h2>
-        <div>
-          name: <input onChange={handleNameChange} value={newName} />
-        </div>
-        <div>
-          phone-number: <input onChange={handlePhoneNumberChange} value={newNumber} />
-        </div>
-        <div>
-          <button type="submit">add</button>
-        </div>
-      </form>
-      <h2>Numbers</h2>
-      {/* todo: add number as well. */}
-      {persons.map((person) => (
-        <p key={person.id}>{person.name} {person.number}</p>
-      ))}
     </div>
   )
 }
