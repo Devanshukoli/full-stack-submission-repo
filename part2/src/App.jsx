@@ -15,15 +15,6 @@ const App = () => {
   const [newNumber, setNewNumber] = useState('')
   const [searchTerm, setNewSearchTerm] = useState('')
 
-  setTimeout(() => {
-    console.log('loop..')
-    let i = 0
-    while (i < 99999999999) {
-      i++
-    }
-    console.log('end')
-  }, 5000)
-
   const handleNameChange = (event) => {
     setNewName(event.target.value)
   }
