@@ -1,68 +1,78 @@
-import { useState, useEffect } from 'react'
-import axios from 'axios'
-import Note from '../components/Note'
+import { useState } from 'react'
+import Filter from '../components/Filter'
+import Performanceform from '../components/Personform'
+import Persons from '../components/Person'
 
 const App = () => {
+  const [persons, setPersons] = useState([
+    { name: 'Arto Hellas', number: '040-123456', id: 1 },
+    { name: 'Ada Lovelace', number: '39-44-5323523', id: 2 },
+    { name: 'Dan Abramov', number: '12-43-234345', id: 3 },
+    { name: 'Mary Poppendieck', number: '39-23-6423122', id: 4 }
+  ])
 
-  const [notes, setNotes] = useState([])
-  const [newNote, setNewNote] = useState('')
-  const [showAll, setShowAll] = useState(true)
+  const [newName, setNewName] = useState('')
+  const [newNumber, setNewNumber] = useState('')
+  const [searchTerm, setNewSearchTerm] = useState('')
 
-  const hook = () => {
-    console.log('effect')
-    axios
-      .get('http://localhost:3001/notes')
-      .then(res => {
-        console.log('promise fulfilled')
-        const notes = res.data
-        setNotes(notes)
-      })
+  const handleNameChange = (event) => {
+    setNewName(event.target.value)
   }
 
-  useEffect(() => hook, [])
-  console.log('render', notes.length, 'notes')
+  const handlePhoneNumberChange = (event) => {
+    setNewNumber(event.target.value)
+  }
 
-  const addNote = (event) => {
+  const handleSearch = (event) => {
+    setNewSearchTerm(event.target.value);
+  }
+
+  const addNumber = (event) => {
     event.preventDefault()
-    const noteObject = {
-      content: newNote,
-      important: Math.random() < 0.5,
-      id: String(notes.length + 1),
+
+    const personObject = {
+      name: newName,
+      number: newNumber
     }
 
-    setNotes(notes.concat(noteObject))
-    setNewNote('')
+    const existingPerson = persons.find(
+      (x) => x.name === personObject.name
+    )
+
+    if (existingPerson) {
+
+      alert(`${personObject.name} already exists.`)
+
+      setNewName('')
+
+      return
+    }
+
+    setPersons(persons.concat(personObject))
+
+    setNewName('')
+    setNewNumber('')
+
   }
 
-  const handleNoteChange = (event) => {
-    console.log(event.target.value)
-    setNewNote(event.target.value)
-  }
 
-  const notesToShow = showAll
-    ? notes
-    : notes.filter(note => note.important === true)
 
   return (
     <div>
-      <h1>Notes</h1>
-      <div>
-        <button onClick={() => setShowAll(!showAll)}>
-          show {showAll ? 'important' : 'all'}
-        </button>
-      </div>
-      <ul>
-        {notesToShow.map((note) => (
-          <Note key={note.id} note={note} />
-        ))}
-      </ul>
-      <form onSubmit={addNote}>
-        <input
-          value={newNote}
-          onChange={handleNoteChange}
-        />
-        <button type='submit'>save</button>
-      </form>
+      <h2>Phonebook</h2>
+
+      <Filter handleSearch={handleSearch} searchTerm={searchTerm} persons={persons} />
+
+      <Performanceform
+        addNumber={addNumber}
+        handleNameChange={handleNameChange}
+        newName={newName}
+        handlePhoneNumberChange={handlePhoneNumberChange}
+        newNumber={newNumber}
+      />
+
+      <Persons persons={persons} />
+
     </div>
   )
 }
