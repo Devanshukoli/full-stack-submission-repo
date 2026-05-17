@@ -31,7 +31,7 @@ const App = () => {
     }
 
     const noteObject = {
-      id: String(notes.length + 1),
+      // id: String(notes.length + 1),
       content: newNote,
       important: Math.random() < 0.5,
     }
