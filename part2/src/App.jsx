@@ -25,8 +25,8 @@ const App = () => {
   const addNote = (event) => {
     event.preventDefault()
 
-    if (notes.length === 0) {
-      alert("write something!")
+    if (newNote.length === 0) {
+      alert("write soemthing")
       return
     }
 
@@ -47,7 +47,6 @@ const App = () => {
   }
 
   const handleNoteChange = (event) => {
-    console.log(event.target.value)
     setNewNote(event.target.value)
   }
 
