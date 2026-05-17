@@ -29,6 +29,16 @@
       "id": "OALi5J2X6X4",
       "content": "I don't really get few things sometimes.",
       "important": true
+    },
+    {
+      "id": "AaTduIXQMDU",
+      "content": "sdfsdfs",
+      "important": true
+    },
+    {
+      "id": "VYxUgGiO4h0",
+      "content": "sdfsfds",
+      "important": false
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

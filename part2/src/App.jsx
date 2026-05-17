@@ -19,7 +19,7 @@ const App = () => {
       })
   }
 
-  useEffect(() => hook, [])
+  useEffect(() => hook(), [])
   console.log('render', notes.length, 'notes')
 
   const addNote = (event) => {
