@@ -24,6 +24,11 @@
       "content": "CSS is not my forte",
       "important": true,
       "id": "w9mcCG611Yc"
+    },
+    {
+      "content": "Graphql is kinda complex now",
+      "important": false,
+      "id": "2G9OTY5bxzA"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"
