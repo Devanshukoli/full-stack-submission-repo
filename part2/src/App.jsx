@@ -62,6 +62,18 @@ const App = () => {
 
   }
 
+  const deletePersonNum = (id) => {
+
+    confirm('do you want to delete this?')
+
+    personService.deletePerson(id)
+      .then(() => {
+        setPersons(
+          persons.filter(person => person.id !== id)
+        )
+      })
+  }
+
 
 
   return (
@@ -78,7 +90,7 @@ const App = () => {
         newNumber={newNumber}
       />
 
-      <Persons persons={persons} />
+      <Persons persons={persons} deletePersonNum={deletePersonNum} />
 
     </div>
   )
