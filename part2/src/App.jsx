@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import axios from 'axios'
 import Filter from '../components/Filter'
 import Performanceform from '../components/Personform'
 import Persons from '../components/Person'
@@ -51,7 +52,10 @@ const App = () => {
       return
     }
 
-    setPersons(persons.concat(personObject))
+    axios.post('http://localhost:3001/persons', personObject)
+      .then(response => {
+        setPersons(persons.concat(response.data))
+      })
 
     setNewName('')
     setNewNumber('')
