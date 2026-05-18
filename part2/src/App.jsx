@@ -3,6 +3,7 @@ import axios from 'axios'
 import Filter from '../components/Filter'
 import Performanceform from '../components/Personform'
 import Persons from '../components/Person'
+import personService from './services/persons'
 
 const App = () => {
 
@@ -12,10 +13,9 @@ const App = () => {
   const [searchTerm, setNewSearchTerm] = useState('')
 
   useEffect(() => {
-    fetch("http://localhost:3001/persons")
-      .then(res => res.json())
-      .then(res => {
-        setPersons(res)
+    personService.getAllPersons()
+      .then(initialData => {
+        setPersons(initialData)
       })
   }, [])
 
@@ -52,9 +52,9 @@ const App = () => {
       return
     }
 
-    axios.post('http://localhost:3001/persons', personObject)
-      .then(response => {
-        setPersons(persons.concat(response.data))
+    personService.createPersons(personObject)
+      .then(res => {
+        setPersons(persons.concat(res))
       })
 
     setNewName('')

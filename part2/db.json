@@ -44,6 +44,11 @@
       "name": "Honey potter",
       "number": "78234782",
       "id": "iqDoWgkevhM"
+    },
+    {
+      "name": "John doe",
+      "number": "2893482974",
+      "id": "O7iEhAbgok0"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"
