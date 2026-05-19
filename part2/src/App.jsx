@@ -5,6 +5,7 @@ import Persons from '../components/Person'
 import personService from './services/persons'
 import Notification from '../components/Notification'
 import './index.css'
+import Footer from '../components/Footer'
 
 const App = () => {
 
@@ -107,6 +108,7 @@ const App = () => {
 
       <Persons persons={persons} deletePersonNum={deletePersonNum} />
 
+      <Footer />
     </div>
   )
 }
