@@ -34,24 +34,6 @@ const App = () => {
   const addNumber = (event) => {
     event.preventDefault()
 
-    if (newNote.length === 0) {
-      alert("write soemthing")
-      return
-    }
-
-    const noteObject = {
-      // id: String(notes.length + 1),
-      content: newNote,
-      important: Math.random() < 0.5,
-    }
-
-    noteService
-      .create(noteObject)
-      .then(createdNotes => {
-        setNotes(notes.concat(createdNotes))
-        setNewNote('')
-      })
-
     const personObject = {
       name: newName,
       number: newNumber
@@ -80,13 +62,6 @@ const App = () => {
 
   }
 
-  const handleNoteChange = (event) => {
-    setNewNote(event.target.value)
-  }
-
-  const notesToShow = showAll
-    ? notes
-    : notes.filter(note => note.important === true)
   const deletePersonNum = (id) => {
 
     confirm('do you want to delete this?')
@@ -100,44 +75,8 @@ const App = () => {
   }
 
 
-
-  const toggleImportanceOf = id => {
-    const note = notes.find(n => n.id === id)
-    const changedNote = { ...note, important: !note.important }
-
-    noteService
-      .update(id, changedNote)
-      .then(updatedNotes => {
-        setNotes(notes.map(note => note.id === id ? updatedNotes : note))
-      })
-      .catch(error => {
-        alert(
-          `the note '${note.content}' was already deleted from server`
-        )
-        setNotes(notes.filter(n => n.id !== id))
-      })
-  }
-
   return (
     <div>
-      <h1>Notes</h1>
-      <div>
-        <button onClick={() => setShowAll(!showAll)}>
-          show {showAll ? 'important' : 'all'}
-        </button>
-      </div>
-      <ul>
-        {notesToShow.map((note) => (
-          <Note key={note.id} note={note} toggleImportance={() => toggleImportanceOf(note.id)} />
-        ))}
-      </ul>
-      <form onSubmit={addNote}>
-        <input
-          value={newNote}
-          onChange={handleNoteChange}
-        />
-        <button type='submit'>save</button>
-      </form>
       <h2>Phonebook</h2>
 
       <Filter handleSearch={handleSearch} searchTerm={searchTerm} persons={persons} />
