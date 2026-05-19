@@ -58,6 +58,14 @@ const App = () => {
       .then(res => {
         setPersons(persons.concat(res))
       })
+      .catch((error) => {
+        setErrorMessage(
+          `Person '${persons.name}' was already removed from server`
+        )
+        setTimeout(() => {
+          setErrorMessage(null)
+        }, 1000)
+      })
 
     setNewName('')
     setNewNumber('')
@@ -85,7 +93,7 @@ const App = () => {
     <div>
       <h1>Phonebook</h1>
 
-      <Notification message={errorMessage}/>
+      <Notification message={errorMessage} />
 
       <Filter handleSearch={handleSearch} searchTerm={searchTerm} persons={persons} />
 
