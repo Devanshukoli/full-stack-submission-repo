@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react'
-import axios from 'axios'
 import Filter from '../components/Filter'
 import Performanceform from '../components/Personform'
 import Persons from '../components/Person'
 import personService from './services/persons'
+import './index.css'
 
 const App = () => {
 
@@ -77,7 +77,7 @@ const App = () => {
 
   return (
     <div>
-      <h2>Phonebook</h2>
+      <h1>Phonebook</h1>
 
       <Filter handleSearch={handleSearch} searchTerm={searchTerm} persons={persons} />
 
