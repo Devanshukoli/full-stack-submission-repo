@@ -1,35 +1,4 @@
 {
-  "notes": [
-    {
-      "id": "1",
-      "content": "HTML is easy",
-      "important": false
-    },
-    {
-      "id": "2",
-      "content": "Browser can execute only JavaScript",
-      "important": false
-    },
-    {
-      "id": "3",
-      "content": "GET and POST are the most important methods of HTTP protocol",
-      "important": true
-    },
-    {
-      "content": "React is fun to learn",
-      "important": false,
-      "id": "XsX3xaVlvXE"
-    },
-    {
-      "content": "CSS is not my forte",
-      "important": true,
-      "id": "w9mcCG611Yc"
-    },
-    {
-      "content": "Graphql is kinda complex now",
-      "important": false,
-      "id": "2G9OTY5bxzA"
-    }
-  ],
+  "persons": [],
   "$schema": "./node_modules/json-server/schema.json"
 }
