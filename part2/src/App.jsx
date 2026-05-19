@@ -3,6 +3,7 @@ import Filter from '../components/Filter'
 import Performanceform from '../components/Personform'
 import Persons from '../components/Person'
 import personService from './services/persons'
+import Notification from '../components/Notification'
 import './index.css'
 
 const App = () => {
@@ -10,7 +11,8 @@ const App = () => {
   const [persons, setPersons] = useState([])
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNumber] = useState('')
-  const [searchTerm, setNewSearchTerm] = useState('')
+  const [searchTerm, setNewSearchTerm] = useState('');
+  const [errorMessage, setErrorMessage] = useState('Error happened...')
 
   useEffect(() => {
     personService.getAllPersons()
@@ -82,6 +84,8 @@ const App = () => {
   return (
     <div>
       <h1>Phonebook</h1>
+
+      <Notification message={errorMessage}/>
 
       <Filter handleSearch={handleSearch} searchTerm={searchTerm} persons={persons} />
 
