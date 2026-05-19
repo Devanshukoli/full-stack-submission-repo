@@ -13,7 +13,7 @@ const App = () => {
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNumber] = useState('')
   const [searchTerm, setNewSearchTerm] = useState('');
-  const [errorMessage, setErrorMessage] = useState('Error happened...')
+  const [notification, setNotification] = useState(null)
 
   useEffect(() => {
     personService.getAllPersons()
@@ -55,17 +55,30 @@ const App = () => {
       return
     }
 
+
+
     personService.createPersons(personObject)
       .then(res => {
         setPersons(persons.concat(res))
+
+        setNotification({
+          message: `Added ${res.name}`,
+          type: 'success'
+        })
+
+        setTimeout(() => {
+          setNotification(null)
+        }, 3000)
       })
       .catch((error) => {
-        setErrorMessage(
-          `Person '${persons.name}' was already removed from server`
-        )
+        setNotification({
+          message: `Failed to add person...`,
+          type: 'error'
+        })
+
         setTimeout(() => {
-          setErrorMessage(null)
-        }, 1000)
+          setNotification(null)
+        }, 2000)
       })
 
     setNewName('')
@@ -84,6 +97,15 @@ const App = () => {
           setPersons(
             persons.filter(person => person.id !== id)
           )
+
+          setNotification({
+            message: `Person deleted successfully.`,
+            type: 'success'
+          })
+
+          setTimeout(() => {
+            setNotification(null)
+          }, 3000)
         })
     }
     return;
@@ -94,7 +116,7 @@ const App = () => {
     <div>
       <h1>Phonebook</h1>
 
-      <Notification message={errorMessage} />
+      <Notification notification={notification} />
 
       <Filter handleSearch={handleSearch} searchTerm={searchTerm} persons={persons} />
 

@@ -9,6 +9,16 @@
       "name": "Arto Hellas",
       "number": "2397423047",
       "id": "IsmBA6FZgUo"
+    },
+    {
+      "name": "hola amigo",
+      "number": "9234792347",
+      "id": "lqzwH8xLg2A"
+    },
+    {
+      "name": "kanna hashimoto",
+      "number": "29038402374",
+      "id": "dL8Y32KN6uM"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"
