@@ -64,14 +64,18 @@ const App = () => {
 
   const deletePersonNum = (id) => {
 
-    confirm('do you want to delete this?')
+    let isConfirmed = confirm('do you want to delete this?')
 
-    personService.deletePerson(id)
-      .then(() => {
-        setPersons(
-          persons.filter(person => person.id !== id)
-        )
-      })
+    if (isConfirmed === true) {
+
+      personService.deletePerson(id)
+        .then(() => {
+          setPersons(
+            persons.filter(person => person.id !== id)
+          )
+        })
+    }
+    return;
   }
 
 
