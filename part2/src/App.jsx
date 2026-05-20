@@ -107,6 +107,12 @@ const App = () => {
             setNotification(null)
           }, 3000)
         })
+        .catch((error) => {
+          setNotification({
+            message: `Person is already deleted from the server.`,
+            type: 'error'
+          })
+        })
     }
     return;
   }

@@ -1,11 +1,6 @@
 {
   "persons": [
     {
-      "name": "Dev kp",
-      "number": "278934923",
-      "id": "xwtKv_IdDxQ"
-    },
-    {
       "name": "Arto Hellas",
       "number": "2397423047",
       "id": "IsmBA6FZgUo"
@@ -19,6 +14,11 @@
       "name": "kanna hashimoto",
       "number": "29038402374",
       "id": "dL8Y32KN6uM"
+    },
+    {
+      "name": "dev kp",
+      "number": "892374923",
+      "id": "xIZRiDec6Rs"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"
