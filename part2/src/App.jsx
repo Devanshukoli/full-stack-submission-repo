@@ -1,142 +1,45 @@
 import { useState, useEffect } from 'react'
-import Filter from '../components/Filter'
-import Performanceform from '../components/Personform'
-import Persons from '../components/Person'
-import personService from './services/persons'
-import Notification from '../components/Notification'
-import './index.css'
-import Footer from '../components/Footer'
+import axios from 'axios'
 
 const App = () => {
-
-  const [persons, setPersons] = useState([])
-  const [newName, setNewName] = useState('')
-  const [newNumber, setNewNumber] = useState('')
-  const [searchTerm, setNewSearchTerm] = useState('');
-  const [notification, setNotification] = useState(null)
+  const [value, setValue] = useState('')
+  const [rates, setRates] = useState({})
+  const [country, setCountry] = useState(null)
 
   useEffect(() => {
-    personService.getAllPersons()
-      .then(initialData => {
-        setPersons(initialData)
-      })
-  }, [])
+    console.log('effect run, currency is now', country)
 
-  const handleNameChange = (event) => {
-    setNewName(event.target.value)
+    // skip if currency is not defined
+    if (country) {
+      console.log('fetching country information...')
+      axios
+        .get(`https://studies.cs.helsinki.fi/restcountries/api/name/${country}`)
+        .then(response => {
+          console.log(response.data)
+          // setCountry(response.data)
+          // setRates(response.data.rates)
+        })
+    }
+  }, [country])
+
+  const handleChange = (event) => {
+    setValue(event.target.value)
   }
 
-  const handlePhoneNumberChange = (event) => {
-    setNewNumber(event.target.value)
-  }
-
-  const handleSearch = (event) => {
-    setNewSearchTerm(event.target.value);
-  }
-
-  const addNumber = (event) => {
+  const onSearch = (event) => {
     event.preventDefault()
-
-    const personObject = {
-      name: newName,
-      number: newNumber
-    }
-
-    const existingPerson = persons.find(
-      (x) => x.name === personObject.name
-    )
-
-    if (existingPerson) {
-
-      alert(`${personObject.name} already exists.`)
-
-      setNewName('')
-
-      return
-    }
-
-
-
-    personService.createPersons(personObject)
-      .then(res => {
-        setPersons(persons.concat(res))
-
-        setNotification({
-          message: `Added ${res.name}`,
-          type: 'success'
-        })
-
-        setTimeout(() => {
-          setNotification(null)
-        }, 3000)
-      })
-      .catch((error) => {
-        setNotification({
-          message: `Failed to add person...`,
-          type: 'error'
-        })
-
-        setTimeout(() => {
-          setNotification(null)
-        }, 2000)
-      })
-
-    setNewName('')
-    setNewNumber('')
-
+    setCountry(value)
   }
-
-  const deletePersonNum = (id) => {
-
-    let isConfirmed = confirm('do you want to delete this?')
-
-    if (isConfirmed === true) {
-
-      personService.deletePerson(id)
-        .then(() => {
-          setPersons(
-            persons.filter(person => person.id !== id)
-          )
-
-          setNotification({
-            message: `Person deleted successfully.`,
-            type: 'success'
-          })
-
-          setTimeout(() => {
-            setNotification(null)
-          }, 3000)
-        })
-        .catch((error) => {
-          setNotification({
-            message: `Person is already deleted from the server.`,
-            type: 'error'
-          })
-        })
-    }
-    return;
-  }
-
 
   return (
     <div>
-      <h1>Phonebook</h1>
-
-      <Notification notification={notification} />
-
-      <Filter handleSearch={handleSearch} searchTerm={searchTerm} persons={persons} />
-
-      <Performanceform
-        addNumber={addNumber}
-        handleNameChange={handleNameChange}
-        newName={newName}
-        handlePhoneNumberChange={handlePhoneNumberChange}
-        newNumber={newNumber}
-      />
-
-      <Persons persons={persons} deletePersonNum={deletePersonNum} />
-
-      <Footer />
+      <form onSubmit={onSearch}>
+        currency: <input value={value} onChange={handleChange} />
+        <button type="submit">exchange rate</button>
+      </form>
+      <pre>
+        {JSON.stringify(rates, null, 2)}
+      </pre>
     </div>
   )
 }
